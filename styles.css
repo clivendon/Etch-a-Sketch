@@ -88,3 +88,27 @@ textarea:not([rows]) {
 :target {
 	scroll-margin-block: 5ex;
 }
+
+body {
+	height: 100vh;
+	width: 90vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 720px;
+  height: 720px;
+}
+
+.grid-square {
+  width: 60px;
+  height: 60px;
+  background-color: #ccc;
+  border: 1px solid #ddd;
+}
