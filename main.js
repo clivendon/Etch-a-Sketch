@@ -1,4 +1,6 @@
-document.getElementsByClassName("grid-square");
+let changeSizeButton = document.getElementById("resize-button");
+let container = document.getElementById("container");
+let gridSize = 16;
 
 function randomColor() {
 	const r = Math.floor(Math.random() * 256); // 0 to 255
@@ -9,19 +11,37 @@ function randomColor() {
 	return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 
-const generateGrid = (gridSize) => {
-	for (let i = 0; i < gridSize; i++) {
-		for (let j = 0; j < gridSize; j++) {
+const generateGrid = (size) => {
+	for (let i = 0; i < size; i++) {
+		for (let j = 0; j < size; j++) {
 			const square = document.createElement("div");
 			square.classList.add("grid-square");
-			// Add the event listener to each square
+			square.style.width = 720 / size + "px";
+			square.style.height = 720 / size + "px";
 			square.addEventListener("mouseover", (event) => {
 				event.target.style.backgroundColor = randomColor();
 			});
 			// Append each square to the container
-			document.querySelector(".container").appendChild(square);
+			container.appendChild(square);
 		}
 	}
 };
 
-generateGrid(16);
+const changeGridSize = () => {
+	container.innerHTML = "";
+
+	let requestedSize;
+	while (true) {
+		requestedSize = prompt("Enter the desired grid size from 4-100");
+		if (!isNaN(requestedSize) && requestedSize >= 4 && requestedSize <= 100) {
+			break;
+		}
+	}
+
+	gridSize = requestedSize;
+	generateGrid(gridSize);
+};
+
+changeSizeButton.addEventListener("click", changeGridSize);
+
+generateGrid(gridSize);
